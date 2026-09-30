@@ -10,6 +10,8 @@ export default function Robot() {
 
   const robotRef = useRef<THREE.Group>(null);
 
+  const baseY = useRef<number | null>(null);
+
   const mouse = useRef({
     x: 0,
     y: 0,
@@ -29,9 +31,19 @@ export default function Robot() {
     };
   }, []);
 
-  useFrame(() => {
+  useFrame(({ clock }) => {
     if (!robotRef.current) return;
 
+    // Store the original Y position once
+    if (baseY.current === null) {
+      baseY.current = robotRef.current.position.y;
+    }
+
+    // Subtle floating animation
+    robotRef.current.position.y =
+      baseY.current + Math.sin(clock.elapsedTime * 1.2) * 0.03;
+
+    // Cursor interaction
     const targetY = mouse.current.x * 0.25;
     const targetX = -mouse.current.y * 0.12;
 

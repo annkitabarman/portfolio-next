@@ -4,12 +4,17 @@ import RobotScene from "./RobotScene";
 import Navbar from "./Navbar";
 import TypingAnimation from "./TypingAnimation";
 import { MapPin } from "lucide-react";
+import FallingLetters from "./FallingLetters";
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen overflow-hidden bg-[#09070d]">
       {/* 3D ROBOT */}
-      <RobotScene />
+      <FallingLetters />
+      <div className="pointer-events-none absolute right-[5%] top-1/2 z-0 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-[#8b5cf6]/10 blur-[120px]" />
+      <div className="absolute inset-0 z-[1]">
+        <RobotScene />
+      </div>
 
       {/* NAVBAR */}
       <Navbar />
@@ -58,7 +63,7 @@ export default function Hero() {
           <p className="my-4 text-2xl text-[#bd8cff]">Hello! I am</p>
 
           {/* Name */}
-          <h1 className="text-6xl font-medium leading-[0.6] tracking-[-0.06em]">
+          <h1 className="text-[clamp(3.5rem,5vw,5.5rem)] font-medium leading-[0.8] tracking-[-0.06em]">
             ANKITA BARMAN
           </h1>
 
