@@ -12,6 +12,21 @@ export default function PortfolioIntro() {
   const firstNameRestRef = useRef<HTMLSpanElement>(null);
   const lastNameRestRef = useRef<HTMLSpanElement>(null);
 
+  const getLogoPosition = () => {
+    const logo = document.getElementById("nav-logo");
+
+    if (!logo) {
+      return { x: 0, y: 0 };
+    }
+
+    const rect = logo.getBoundingClientRect();
+
+    return {
+      x: rect.left + rect.width / 2 - window.innerWidth / 2,
+      y: rect.top + rect.height / 2 - window.innerHeight / 2,
+    };
+  };
+
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const intro = introRef.current;
@@ -119,13 +134,13 @@ export default function PortfolioIntro() {
        */
 
       tl.to(name, {
-        scale: 0.2,
+        scale: 0.13,
 
-        x: () => -window.innerWidth / 2 + 120,
-        y: () => -window.innerHeight / 2 + 50,
+        x: () => getLogoPosition().x,
+
+        y: () => getLogoPosition().y,
 
         duration: 1,
-
         ease: "power4.inOut",
       });
 
@@ -136,11 +151,9 @@ export default function PortfolioIntro() {
        */
 
       tl.to(name, {
-        x: () => -window.innerWidth / 2 + 120,
-        y: () => -window.innerHeight / 2 + 50,
-
+        x: () => getLogoPosition().x,
+        y: () => getLogoPosition().y,
         duration: 0.25,
-
         ease: "power2.out",
       });
 
